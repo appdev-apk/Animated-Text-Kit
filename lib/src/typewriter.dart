@@ -136,6 +136,31 @@ class _TypewriterState extends State<TypewriterAnimatedTextKit>
   }
 
   @override
+  void didUpdateWidget(TypewriterAnimatedTextKit oldWidget) {
+    if (widget.text != oldWidget.text) {
+      _index = -1;
+      _texts = List<Map>();
+
+      for (int i = 0; i < widget.text.length; i++) {
+        try {
+          if (!_texts[i].containsKey('text')) throw new Error();
+
+          _texts.add({
+            'text': _texts[i]['text'],
+            'speed':
+                _texts[i].containsKey('speed') ? _texts[i]['speed'] : _speed,
+            'pause':
+                _texts[i].containsKey('pause') ? _texts[i]['pause'] : _pause,
+          });
+        } catch (e) {
+          _texts
+              .add({'text': widget.text[i], 'speed': _speed, 'pause': _pause});
+        }
+      }
+      super.didUpdateWidget(oldWidget);
+    }
+  }
+  @override
   void dispose() {
     _controller?.stop();
     _controller?.dispose();
