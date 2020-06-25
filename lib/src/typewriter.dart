@@ -138,8 +138,8 @@ class _TypewriterState extends State<TypewriterAnimatedTextKit>
   @override
   void didUpdateWidget(TypewriterAnimatedTextKit oldWidget) {
     if (widget.text != oldWidget.text) {
-      _index = 0;
-      _texts = List<Map<String,dynamic>>();
+      //_index = 0;
+      _texts = List<Map<dynamic,dynamic>>();
 
       for (int i = 0; i < widget.text.length; i++) {
         try {
